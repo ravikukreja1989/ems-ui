@@ -1,30 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {DataSource} from '@angular/cdk/table';
-
+import {EmployeeRegistrationComponent} from "../employee-registration/employee-registration.component";
+import {EmployeeServiceService} from "../../services/employee-service/employee-service.service";
 import {Observable} from 'rxjs/observable';
-import {EmployeeServiceService} from "./services/employee-service/employee-service.service";
-import {Employee} from "./model/employee";
-import {EmployeeRegistrationComponent} from "./component/employee-registration/employee-registration.component";
-
+import {Employee} from "../../model/employee";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-dashboard-page',
+  templateUrl: './dashboard-page.component.html',
+  styleUrls: ['./dashboard-page.component.css']
 })
-export class AppComponent {
-  title = 'WELCOME TO EMPLOYEE MANAGEMENT SYSTEM';
-
+export class DashboardPageComponent implements OnInit {
   successMessage : string;
-  dataSource = new PostDataSource(this.emplService);
-
   constructor(public dialog: MatDialog, private emplService: EmployeeServiceService) {
   }
+
+  displayedColumns = ['fname', 'lname', 'gender', 'date', 'department', 'delete'];
+  dataSource = new PostDataSource(this.emplService);
+
+  ngOnInit() {
+  }
+
   openDialog(): void {
     let dialogRef = this.dialog.open(EmployeeRegistrationComponent, {
       width: '600px'
     });
+
 
     dialogRef.componentInstance.event.subscribe((result) => {
       this.emplService.createUser(result.data).subscribe(

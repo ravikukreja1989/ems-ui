@@ -1,0 +1,74 @@
+<html>
+<body>
+<br/>
+  <div class="container">
+    <div class="container">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+        <div class="blocks" >
+          <font color="#006400" size="6px">
+          <b>{{successMessage}}</b>
+          </font>
+        </div>
+      </div>
+    </div>
+  <br>
+  <div class="container">
+    <div class="container">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+        <div class="blocks" >
+          <button (click)="openDialog()" mat-raised-button color="primary">
+            <mat-icon>add</mat-icon> Register Employee
+          </button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <mat-card class="card" >
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>LIST OF REGISTERED EMPLOYEES</h3>
+          </mat-card-title>
+          <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+              <mat-table #table [dataSource]="dataSource">
+                <ng-container matColumnDef="fname">
+                  <mat-header-cell *matHeaderCellDef> <b><u>FIRST NAME</u></b> </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="lname">
+                  <mat-header-cell *matHeaderCellDef> <b><u>LAST NAME</u></b> </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="gender">
+                  <mat-header-cell *matHeaderCellDef> <b><u>GENDER</u></b></mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="date">
+                  <mat-header-cell *matHeaderCellDef> <b><u>DATE OF BIRTH</u></b> </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.date | date: 'dd/MM/yyyy'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="department">
+                  <mat-header-cell *matHeaderCellDef> <b><u>DEPARTMENT NAME</u></b></mat-header-cell>
+                  <mat-cell *matCellDef="let element">  {{element.department.name}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                  <mat-header-cell *matHeaderCellDef><b><u>DELETE</u></b></mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <a type="button">
+                      <mat-icon class="icon">delete</mat-icon>
+                    </a>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
